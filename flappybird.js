@@ -7,6 +7,9 @@ birdImage.src = 'bully.png'; // Ensure bully.png is in the same directory
 const pipeImage = new Image();
 pipeImage.src = 'tower.jpg'; // Ensure tower.jpg is in the same directory
 
+const explosionImage = new Image();
+explosionImage.src = 'explosion.png'; // Ensure explosion.png is in the same directory
+
 const bird = {
   x: 50,
   y: 150,
@@ -15,23 +18,32 @@ const bird = {
   gravity: 0.2,
   lift: -7,
   velocity: 0,
+  exploded: false,
   draw: function() {
-    context.drawImage(birdImage, this.x, this.y, this.width, this.height);
+    if (this.exploded) {
+      context.drawImage(explosionImage, this.x - this.width, this.y - this.height, this.width * 4, this.height * 4);
+    } else {
+      context.drawImage(birdImage, this.x, this.y, this.width, this.height);
+    }
   },
   update: function() {
-    this.velocity += this.gravity;
-    this.y += this.velocity;
-    if (this.y + this.height > canvas.height) {
-      this.y = canvas.height - this.height;
-      this.velocity = 0;
-    }
-    if (this.y < 0) {
-      this.y = 0;
-      this.velocity = 0;
+    if (!this.exploded) {
+      this.velocity += this.gravity;
+      this.y += this.velocity;
+      if (this.y + this.height > canvas.height) {
+        this.y = canvas.height - this.height;
+        this.velocity = 0;
+      }
+      if (this.y < 0) {
+        this.y = 0;
+        this.velocity = 0;
+      }
     }
   },
   flap: function() {
-    this.velocity = this.lift;
+    if (!this.exploded) {
+      this.velocity = this.lift;
+    }
   }
 };
 
@@ -82,15 +94,16 @@ function detectCollision() {
 }
 
 function gameLoop() {
-  if (!gameOver) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    bird.update();
-    bird.draw();
-    updatePipes();
-    drawPipes();
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  bird.update();
+  bird.draw();
+  updatePipes();
+  drawPipes();
 
+  if (!gameOver) {
     if (detectCollision()) {
       gameOver = true;
+      bird.exploded = true;
     }
 
     context.fillStyle = "black";
@@ -101,7 +114,6 @@ function gameLoop() {
     frameCount++;
     requestAnimationFrame(gameLoop);
   } else {
-    context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = "black";
     context.font = "30px Arial";
     context.fillText("Game Over", canvas.width / 2 - 75, canvas.height / 2 - 15);
@@ -122,6 +134,7 @@ document.addEventListener("keydown", function(event) {
     pipes.length = 0;
     bird.y = 150;
     bird.velocity = 0;
+    bird.exploded = false;
     frameCount = 0;
     gameLoop();
   }
