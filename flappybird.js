@@ -4,12 +4,15 @@ const context = canvas.getContext("2d");
 const birdImage = new Image();
 birdImage.src = 'bully.png'; // Ensure bully.png is in the same directory
 
+const pipeImage = new Image();
+pipeImage.src = 'tower.jpg'; // Ensure tower.jpg is in the same directory
+
 const bird = {
   x: 50,
   y: 150,
   width: 40,
   height: 40,
-  gravity: 0.2, // Lighter gravity
+  gravity: 0.2,
   lift: -7,
   velocity: 0,
   draw: function() {
@@ -42,9 +45,8 @@ let gameOver = false;
 
 function drawPipes() {
   pipes.forEach(pipe => {
-    context.fillStyle = "green";
-    context.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-    context.fillRect(pipe.x, canvas.height - pipe.bottom, pipeWidth, pipe.bottom);
+    context.drawImage(pipeImage, pipe.x, 0, pipeWidth, pipe.top);
+    context.drawImage(pipeImage, pipe.x, canvas.height - pipe.bottom, pipeWidth, pipe.bottom);
   });
 }
 
@@ -99,6 +101,7 @@ function gameLoop() {
     frameCount++;
     requestAnimationFrame(gameLoop);
   } else {
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = "black";
     context.font = "30px Arial";
     context.fillText("Game Over", canvas.width / 2 - 75, canvas.height / 2 - 15);
