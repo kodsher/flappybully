@@ -13,8 +13,8 @@ explosionImage.src = 'explosion.png'; // Ensure explosion.png is in the same dir
 const bird = {
   x: 50,
   y: 150,
-  width: 40,
-  height: 40,
+  width: 160, // 4 times larger
+  height: 160, // 4 times larger
   gravity: 0.1, // Reduced gravity
   lift: -7,
   velocity: 0,
