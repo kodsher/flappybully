@@ -2,7 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const context = canvas.getContext("2d");
 
 const birdImage = new Image();
-birdImage.src = 'catonplan.png'; // Ensure bully.png is in the same directory
+birdImage.src = 'catonplan.png'; // Ensure catonplan.png is in the same directory
 
 const pipeImage = new Image();
 pipeImage.src = 'tower.jpg'; // Ensure tower.jpg is in the same directory
@@ -15,13 +15,13 @@ const bird = {
   y: 150,
   width: 40,
   height: 40,
-  gravity: 0.2,
+  gravity: 0.1, // Reduced gravity
   lift: -7,
   velocity: 0,
   exploded: false,
   draw: function() {
     if (this.exploded) {
-      context.drawImage(explosionImage, this.x - this.width, this.y - this.height, this.width * 4, this.height * 4);
+      context.drawImage(explosionImage, this.x - this.width * 1.5, this.y - this.height * 1.5, this.width * 4, this.height * 4);
     } else {
       context.drawImage(birdImage, this.x, this.y, this.width, this.height);
     }
