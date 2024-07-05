@@ -9,7 +9,7 @@ const bird = {
   y: 150,
   width: 40,
   height: 40,
-  gravity: 0.3,
+  gravity: 0.15,
   lift: -7,
   velocity: 0,
   draw: function() {
