@@ -13,15 +13,15 @@ explosionImage.src = 'explosion.png'; // Ensure explosion.png is in the same dir
 const bird = {
   x: 50,
   y: 150,
-  width: 160, // 4 times larger
-  height: 160, // 4 times larger
+  width: 72, // 60% of the original size (40 * 0.6 = 24)
+  height: 72, // 60% of the original size (40 * 0.6 = 24)
   gravity: 0.05, // Reduced gravity
   lift: -3, // Smaller jump
   velocity: 0,
   exploded: false,
   draw: function() {
     if (this.exploded) {
-      context.drawImage(explosionImage, this.x, this.y, this.width, this.height);
+      context.drawImage(explosionImage, this.x, this.y, this.width * 2, this.height * 2);
     } else {
       context.drawImage(birdImage, this.x, this.y, this.width, this.height);
     }
@@ -49,7 +49,7 @@ const bird = {
 
 const pipes = [];
 const pipeWidth = 30;
-const pipeGap = 200;
+const pipeGap = 250; // Increased gap between pipes
 let frameCount = 0;
 let score = 0;
 let highScore = 0;
@@ -63,7 +63,7 @@ function drawPipes() {
 }
 
 function updatePipes() {
-  if (frameCount % 120 === 0) {
+  if (frameCount % 150 === 0) { // Increased interval between pipe sets
     const top = Math.floor(Math.random() * (canvas.height - pipeGap));
     const bottom = canvas.height - top - pipeGap;
     pipes.push({ x: canvas.width, top, bottom });
