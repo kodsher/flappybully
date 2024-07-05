@@ -21,7 +21,7 @@ const bird = {
   exploded: false,
   draw: function() {
     if (this.exploded) {
-      context.drawImage(explosionImage, this.x - this.width * 1.5, this.y - this.height * 1.5, this.width * 4, this.height * 4);
+      context.drawImage(explosionImage, this.x, this.y, this.width, this.height);
     } else {
       context.drawImage(birdImage, this.x, this.y, this.width, this.height);
     }
