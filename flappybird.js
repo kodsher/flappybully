@@ -2,7 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const context = canvas.getContext("2d");
 
 const birdImage = new Image();
-birdImage.src = 'bully.png'; // Ensure bully.png is in the same directory
+birdImage.src = 'catonplan.png'; // Ensure bully.png is in the same directory
 
 const pipeImage = new Image();
 pipeImage.src = 'tower.jpg'; // Ensure tower.jpg is in the same directory
