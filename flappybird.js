@@ -15,8 +15,8 @@ const bird = {
   y: 150,
   width: 160, // 4 times larger
   height: 160, // 4 times larger
-  gravity: 0.1, // Reduced gravity
-  lift: -7,
+  gravity: 0.05, // Reduced gravity
+  lift: -3, // Smaller jump
   velocity: 0,
   exploded: false,
   draw: function() {
