@@ -9,7 +9,7 @@ const bird = {
   y: 150,
   width: 40,
   height: 40,
-  gravity: 0.15,
+  gravity: 0.2, // Lighter gravity
   lift: -7,
   velocity: 0,
   draw: function() {
@@ -33,8 +33,8 @@ const bird = {
 };
 
 const pipes = [];
-const pipeWidth = 30; // Adjusted for bigger game
-const pipeGap = 200; // Adjusted for bigger game
+const pipeWidth = 30;
+const pipeGap = 200;
 let frameCount = 0;
 let score = 0;
 let highScore = 0;
@@ -105,20 +105,22 @@ function gameLoop() {
     context.font = "20px Arial";
     context.fillText(`Score: ${score}`, canvas.width / 2 - 25, canvas.height / 2 + 15);
     context.fillText(`High Score: ${highScore}`, canvas.width / 2 - 50, canvas.height / 2 + 45);
+    context.fillText("Press R to Restart", canvas.width / 2 - 75, canvas.height / 2 + 75);
   }
 }
 
 document.addEventListener("keydown", function(event) {
-  if (event.code === "Space") {
-    if (gameOver) {
-      gameOver = false;
-      score = 0;
-      pipes.length = 0;
-      bird.y = 150;
-      bird.velocity = 0;
-      frameCount = 0;
-    }
+  if (event.code === "Space" && !gameOver) {
     bird.flap();
+  }
+  if (event.code === "KeyR" && gameOver) {
+    gameOver = false;
+    score = 0;
+    pipes.length = 0;
+    bird.y = 150;
+    bird.velocity = 0;
+    frameCount = 0;
+    gameLoop();
   }
 });
 
