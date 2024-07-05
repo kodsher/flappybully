@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bully</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    canvas {
+      display: block;
+      background-color: #70c5ce;
+      border: 5px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Flappy Bully</h1>
+    <canvas id="gameCanvas" width="480" height="640"></canvas>
+  </div>
+  <script src="flappybird.js"></script>
+</body>
+</html>
